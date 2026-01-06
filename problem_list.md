@@ -17,5 +17,5 @@
             if s[i] > maxi:
                 maxi = s[i]
                 di[s[i]] = i
-        return s[di[maxi]:]©leetcode
+        return s[di[maxi]:]
 ```
