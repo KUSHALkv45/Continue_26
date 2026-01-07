@@ -39,3 +39,53 @@ public:
     }
 };
 ```
+```java
+  // Understand this code's TC 07-01-26 wrote it but I want to understand it properly TC  LEETCODE 1340
+  class Solution {
+    public int maxJumps(int[] nums, int d) {
+        int n = nums.length;
+        int [] memo = new int [n];
+
+        // Arrays.fill(memo,-1);
+        int ans = 0;
+        for(int i = 0 ; i < n ; i++){
+            if(memo[i] == 0){
+                ans = Math.max(ans,find(d,nums,i,memo)) ;
+            }
+        }
+
+        return ans;
+    }
+    private int find(int d , int [] nums , int idx , int [] memo){
+        if(memo[idx] != 0){
+            return memo[idx];
+        }
+        int ans = 1;
+
+        // right
+        for(int i = idx+1 ; i <= Math.min(idx+d,nums.length-1) ; i++){
+            if(nums[i] >= nums[idx]){
+                break;
+            }
+            else{
+                ans = Math.max(ans,1+find(d,nums,i,memo));
+            }
+        }
+
+        // left
+        for(int i = idx-1 ; i >= Math.max(0,idx-d) ; i--){
+            if(nums[i] >= nums[idx]){
+                break;
+            }
+            else{
+                ans = Math.max(ans,1+find(d,nums,i,memo));
+            }
+        }
+
+        memo[idx] = ans;
+
+        return ans;
+    }
+
+}
+```
